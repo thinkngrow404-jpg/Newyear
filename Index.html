@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>New Year Surprise 🎆</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #000428, #004e92);
+      font-family: Arial, sans-serif;
+      color: white;
+      overflow: hidden;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 30px;
+      border-radius: 12px;
+      text-align: center;
+      width: 320px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    }
+
+    h1 {
+      margin-bottom: 10px;
+    }
+
+    input {
+      width: 90%;
+      padding: 10px;
+      border: none;
+      border-radius: 6px;
+      margin-top: 15px;
+      font-size: 16px;
+    }
+
+    button {
+      margin-top: 15px;
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+      background: #ffcc00;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #ffd633;
+    }
+
+    .wish {
+      display: none;
+      margin-top: 20px;
+      font-size: 18px;
+      animation: pop 1s ease;
+    }
+
+    @keyframes pop {
+      0% { transform: scale(0); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .confetti {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      background: red;
+      top: -10px;
+      animation: fall 3s linear infinite;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(110vh) rotate(360deg);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <h1>🎆 New Year Surprise 🎆</h1>
+    <p>Enter your name</p>
+    <input type="text" id="nameInput" placeholder="Your name">
+    <br>
+    <button onclick="showWish()">Click for Surprise</button>
+
+    <div class="wish" id="wishText"></div>
+  </div>
+
+  <script>
+    function showWish() {
+      const name = document.getElementById("nameInput").value;
+      const wish = document.getElementById("wishText");
+
+      if (name === "") {
+        alert("Please enter your name 😊");
+        return;
+      }
+
+      wish.innerHTML = `✨ Happy New Year ${name}! ✨<br>
+      May this year bring you happiness, growth, and beautiful surprises 🎉`;
+
+      wish.style.display = "block";
+      createConfetti();
+    }
+
+    function createConfetti() {
+      for (let i = 0; i < 30; i++) {
+        const confetti = document.createElement("div");
+        confetti.className = "confetti";
+        confetti.style.left = Math.random() * 100 + "vw";
+        confetti.style.background = 
+          `hsl(${Math.random() * 360}, 100%, 50%)`;
+        confetti.style.animationDuration = 
+          Math.random() * 2 + 2 + "s";
+        document.body.appendChild(confetti);
+
+        setTimeout(() => {
+          confetti.remove();
+        }, 3000);
+      }
+    }
+  </script>
+
+</body>
+</html>
